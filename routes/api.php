@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Equipamento;
+use App\Models\TipoInstalacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +50,12 @@ Route::group([
         )->name('customers.destroy');
     }
 );
+
+Route::get('tipos-instalacao', function() {
+    return response()->json(TipoInstalacao::all());
+});
+
+Route::get('equipamentos', function() {
+    return response()->json(Equipamento::all());
+});
+
