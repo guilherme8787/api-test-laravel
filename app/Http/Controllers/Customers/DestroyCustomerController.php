@@ -28,7 +28,7 @@ class DestroyCustomerController extends Controller
                     'message' => 'Cliente removido com sucesso.',
                     'customer' => $customer
                 ],
-                Response::HTTP_CREATED
+                Response::HTTP_ACCEPTED
             );
         } catch (Exception $exception) {
             Log::error("message: {$exception->getMessage()}", [

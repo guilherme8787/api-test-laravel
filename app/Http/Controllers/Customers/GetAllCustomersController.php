@@ -22,7 +22,7 @@ class GetAllCustomersController extends Controller
         try {
             $customers = $this->customerService->all();
 
-            return response()->json($customers, Response::HTTP_CREATED);
+            return response()->json($customers, Response::HTTP_OK);
         } catch (Exception $e) {
             Log::error("message: {$e->getMessage()}", [
                 'exception' => $e

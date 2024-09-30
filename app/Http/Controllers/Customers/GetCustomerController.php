@@ -23,7 +23,7 @@ class GetCustomerController extends Controller
         try {
             $customer = $this->customerService->find($id);
 
-            return response()->json($customer, Response::HTTP_CREATED);
+            return response()->json($customer, Response::HTTP_OK);
         } catch (NotFoundCustomerException $customerException) {
             return response()->json(
                 [

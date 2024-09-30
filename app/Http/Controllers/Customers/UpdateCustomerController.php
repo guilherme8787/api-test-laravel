@@ -30,7 +30,7 @@ class UpdateCustomerController extends Controller
                     'message' => 'Cliente atualizado com sucesso.',
                     'customer' => $customer
                 ],
-                Response::HTTP_CREATED
+                Response::HTTP_ACCEPTED
             );
         } catch (ValidationException $validationException) {
             return response()->json(
