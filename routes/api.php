@@ -17,3 +17,34 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group([
+        'prefix' => 'customers',
+    ],
+    function () {
+        Route::post(
+            '/',
+            App\Http\Controllers\Customers\NewCustomerController::class
+        )->name('customers.store');
+
+        Route::get(
+            '/',
+            App\Http\Controllers\Customers\GetAllCustomersController::class
+        )->name('customers.all');
+
+        Route::get(
+            '/{id}',
+            App\Http\Controllers\Customers\GetCustomerController::class
+        )->name('customers.get');
+
+        Route::put(
+            '/{id}',
+            App\Http\Controllers\Customers\UpdateCustomerController::class
+        )->name('customers.update');
+
+        Route::delete(
+            '/{id}',
+            App\Http\Controllers\Customers\DestroyCustomerController::class
+        )->name('customers.destroy');
+    }
+);
