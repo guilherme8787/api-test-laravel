@@ -6,7 +6,7 @@ use App\Exceptions\NotFoundInstallTypeException;
 use App\Exceptions\NotFoundLocaleException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
-use App\Services\Project\ProjectService;
+use App\Services\Project\Contracts\ProjectServiceContract;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -17,7 +17,7 @@ class NewProjectController extends Controller
     /**
      * Class constructor
      */
-    public function __construct(private ProjectService $projectService)
+    public function __construct(private ProjectServiceContract $projectService)
     {
     }
 
