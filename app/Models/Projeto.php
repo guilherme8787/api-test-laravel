@@ -9,7 +9,7 @@ class Projeto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cliente_id', 'localizacao_id', 'nome', 'tipo_instalacao'];
+    protected $fillable = ['cliente_id', 'localizacao_id', 'nome', 'tipo_instalacao_id'];
 
     public function cliente()
     {
@@ -29,6 +29,7 @@ class Projeto extends Model
     public function equipamentos()
     {
         return $this->belongsToMany(Equipamento::class, 'projeto_equipamento')
-            ->withPivot('quantidade');
+                    ->withPivot('quantidade')
+                    ->withTimestamps();
     }
 }

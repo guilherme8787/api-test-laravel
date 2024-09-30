@@ -20,7 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group([
+Route::group(
+    [
         'prefix' => 'customers',
     ],
     function () {
@@ -59,3 +60,14 @@ Route::get('equipamentos', function() {
     return response()->json(Equipamento::all());
 });
 
+Route::group(
+    [
+        'prefix' => 'projects',
+    ],
+    function () {
+        Route::post(
+            '/',
+            App\Http\Controllers\Projects\NewProjectController::class
+        )->name('projects.store');
+    }
+);

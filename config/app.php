@@ -177,6 +177,10 @@ return [
 
         App\Providers\ProjectServiceProvider::class,
         App\Providers\ProjectRepositoryProvider::class,
+
+        App\Providers\LocalizationRepositoryProvider::class,
+
+        App\Providers\TipoInstalacaoRepositoryProvider::class,
     ])->toArray(),
 
     /*

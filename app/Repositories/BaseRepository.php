@@ -93,7 +93,7 @@ class BaseRepository
     */
     public function findBy(string $column, string $value)
     {
-        return $this->model->where($column, $value)->firstOrFail();
+        return $this->model->where($column, $value)->first();
     }
 
     /**

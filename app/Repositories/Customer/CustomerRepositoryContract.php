@@ -12,26 +12,26 @@ interface CustomerRepositoryContract
     public function all();
 
     /**
-    * @param array $data
+    * @param  array  $data
     * @return Model
     */
     public function create(array $data);
 
     /**
-    * @param array $data
-    * @param int $id
+    * @param  array  $data
+    * @param  int  $id
     * @return Model
     */
     public function update(array $data, int $id);
 
     /**
-    * @param int $id
+    * @param  int  $id
     * @return Model
     */
     public function delete(int $id);
 
     /**
-    * @param int $id
+    * @param  int  $id
     * @return Model
     */
     public function find(int $id);
