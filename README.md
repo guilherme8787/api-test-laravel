@@ -6,11 +6,11 @@
 
 ## Documentação Postman da api
 
-- [Documentação da API](https://documenter.getpostman.com/view/14359832/2sAXjDevkw)
+- [Documentação da API]()
 
 ## Tambem tem o arquivo para importar no Postman caso prefira
 
-- `./obj-test.postman_collection.json`
+- `./php-77sol-test.postman_collection.json`
 
 ### Caso não queira usar docker, você irá precisar configurar a aplicação com banco e redis local
 
@@ -19,15 +19,7 @@
 Primeiro, clone aplicação:
 
 ```bash
-git clone https://github.com/guilherme8787/obj-api.git && cd obj-api
-```
-
-### 2. Fala o clone do repositório
-
-Segundo, crie uma rede Docker para isolar os contêineres da aplicação:
-
-```bash
-docker network create --subnet=172.20.0.0/16 php-obj-test
+git clone https://github.com/guilherme8787/api-test-laravel && cd api-test-laravel
 ```
 
 ### 2. Criar a Rede Docker
@@ -35,7 +27,7 @@ docker network create --subnet=172.20.0.0/16 php-obj-test
 Em seguida, crie uma rede Docker para isolar os contêineres da aplicação:
 
 ```bash
-docker network create --subnet=172.20.0.0/16 php-obj-test
+docker network create --subnet=172.20.0.0/16 php-77sol-test
 ```
 
 ### 3. Subir os Contêineres
