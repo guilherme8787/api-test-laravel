@@ -11,4 +11,6 @@ interface ProjectRepositoryContract
     * @return Model
     */
     public function create(array $data);
+
+    public function getAll(array $filters);
 }

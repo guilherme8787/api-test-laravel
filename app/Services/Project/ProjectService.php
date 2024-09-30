@@ -12,6 +12,7 @@ use App\Repositories\Project\ProjectRepositoryContract;
 use App\Repositories\TipoInstalacao\TipoInstalacaoRepositoryContract;
 use App\Services\Project\Contracts\ProjectServiceContract;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -77,5 +78,10 @@ class ProjectService implements ProjectServiceContract
         data_set($data, 'tipo_instalacao_id', $installType->id);
 
         return $this->safeSaveProject($data);
+    }
+
+    public function getAll(array $filters): LengthAwarePaginator
+    {
+        return $this->projectRepository->getAll($filters);
     }
 }

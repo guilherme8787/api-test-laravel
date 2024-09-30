@@ -69,5 +69,10 @@ Route::group(
             '/',
             App\Http\Controllers\Projects\NewProjectController::class
         )->name('projects.store');
+
+        Route::get(
+            '/',
+            App\Http\Controllers\Projects\GetAllProjectsController::class
+        )->name('projects.all');
     }
 );
