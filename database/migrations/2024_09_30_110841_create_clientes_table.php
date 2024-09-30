@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('telefone');
             $table->string('cpf')->nullable()->unique();
             $table->string('cnpj')->nullable()->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

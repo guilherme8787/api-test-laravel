@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('tipo_instalacao_id')->constrained('tipo_instalacaos')->onDelete('cascade');
             $table->string('nome');
             $table->string('tipo_instalacao');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
