@@ -28,6 +28,7 @@ class Projeto extends Model
 
     public function equipamentos()
     {
-        return $this->belongsToMany(Equipamento::class, 'projeto_equipamento');
+        return $this->belongsToMany(Equipamento::class, 'projeto_equipamento')
+            ->withPivot('quantidade');
     }
 }

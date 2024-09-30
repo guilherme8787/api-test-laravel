@@ -13,6 +13,7 @@ class Equipamento extends Model
 
     public function projetos()
     {
-        return $this->belongsToMany(Projeto::class, 'projeto_equipamento');
+        return $this->belongsToMany(Projeto::class, 'projeto_equipamento')
+            ->withPivot('quantidade');
     }
 }
