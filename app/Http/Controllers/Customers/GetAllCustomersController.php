@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Customer\CustomerService;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class GetAllCustomersController extends Controller
 {
@@ -23,6 +24,10 @@ class GetAllCustomersController extends Controller
 
             return response()->json($customers, Response::HTTP_CREATED);
         } catch (Exception $e) {
+            Log::error("message: {$e->getMessage()}", [
+                'exception' => $e
+            ]);
+
             return response()->json(
                 [
                     'message' => $e->getMessage()

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Customer\CustomerService;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class GetCustomerController extends Controller
 {
@@ -31,6 +32,10 @@ class GetCustomerController extends Controller
                 Response::HTTP_NOT_FOUND
             );
         } catch (Exception $exception) {
+            Log::error("message: {$exception->getMessage()}", [
+                'exception' => $exception
+            ]);
+
             return response()->json(
                 [
                     'message' => $exception->getMessage()

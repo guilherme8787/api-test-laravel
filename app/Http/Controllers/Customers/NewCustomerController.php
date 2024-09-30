@@ -7,6 +7,7 @@ use App\Http\Requests\CustomerRequest;
 use App\Services\Customer\CustomerService;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class NewCustomerController extends Controller
@@ -40,6 +41,10 @@ class NewCustomerController extends Controller
                 Response::HTTP_UNPROCESSABLE_ENTITY
             );
         } catch (Exception $e) {
+            Log::error("message: {$e->getMessage()}", [
+                'exception' => $e
+            ]);
+
             return response()->json(
                 [
                     'message' => $e->getMessage()

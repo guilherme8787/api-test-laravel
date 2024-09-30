@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Customer\CustomerService;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class DestroyCustomerController extends Controller
 {
@@ -30,6 +31,10 @@ class DestroyCustomerController extends Controller
                 Response::HTTP_CREATED
             );
         } catch (Exception $exception) {
+            Log::error("message: {$exception->getMessage()}", [
+                'exception' => $exception
+            ]);
+
             return response()->json(
                 [
                     'message' => $exception->getMessage()
