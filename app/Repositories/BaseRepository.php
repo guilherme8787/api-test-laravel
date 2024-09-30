@@ -14,14 +14,16 @@ class BaseRepository
     /**
     * BaseRepository constructor
     */
-    public function __construct(Model $model) {
+    public function __construct(Model $model)
+    {
         $this->model = $model;
     }
 
     /**
     * @return Model
     */
-    public function getModel() {
+    public function getModel()
+    {
         return $this->model;
     }
 
@@ -29,7 +31,8 @@ class BaseRepository
     * @param Model $model
     * @return BaseRepository
     */
-    public function setModel(Model $model) {
+    public function setModel(Model $model)
+    {
         $this->model = $model;
         return $this;
     }
@@ -37,7 +40,8 @@ class BaseRepository
     /**
     * @return Collection
     */
-    public function all() {
+    public function all()
+    {
         return $this->model->all();
     }
 
@@ -45,7 +49,8 @@ class BaseRepository
     * @param array $data
     * @return Model
     */
-    public function create(array $data) {
+    public function create(array $data)
+    {
         return $this->model->create($data);
     }
 
@@ -54,7 +59,8 @@ class BaseRepository
     * @param int $id
     * @return Model
     */
-    public function update(array $data, int $id) {
+    public function update(array $data, int $id)
+    {
         $model = $this->model->findOrFail($id);
         $model->update($data);
         return $model;
@@ -64,7 +70,8 @@ class BaseRepository
     * @param int $id
     * @return Model
     */
-    public function delete(int $id) {
+    public function delete(int $id)
+    {
         $model = $this->model->findOrFail($id);
         $model->delete();
         return $model;
@@ -74,8 +81,9 @@ class BaseRepository
     * @param int $id
     * @return Model
     */
-    public function find(int $id) {
-        return $this->model->findOrFail($id);
+    public function find(int $id)
+    {
+        return $this->model->find($id);
     }
 
     /**
@@ -83,7 +91,8 @@ class BaseRepository
     * @param string $value
     * @return Model
     */
-    public function findBy(string $column, string $value) {
+    public function findBy(string $column, string $value)
+    {
         return $this->model->where($column, $value)->firstOrFail();
     }
 
@@ -92,7 +101,8 @@ class BaseRepository
     * @param string $value
     * @return Collection
     */
-    public function findAllBy(string $column, string $value) {
+    public function findAllBy(string $column, string $value)
+    {
         return $this->model->where($column, $value)->get();
     }
 
@@ -101,7 +111,8 @@ class BaseRepository
     * @param string $value
     * @return Collection
     */
-    public function findAllByPaginate(string $column, string $value) {
+    public function findAllByPaginate(string $column, string $value)
+    {
         return $this->model->where($column, $value)->paginate();
     }
 }
