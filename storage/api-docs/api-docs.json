@@ -1,0 +1,566 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Projetos de Energia Solar",
+        "description": "Documentação da API para gestão de projetos de energia solar",
+        "contact": {
+            "email": "contato@seudominio.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:9000",
+            "description": "Servidor API principal"
+        }
+    ],
+    "paths": {
+        "/api/projects/{id}": {
+            "get": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Obter detalhes de um projeto específico",
+                "description": "Retorna os detalhes de um projeto pelo seu ID",
+                "operationId": "b3c88a543d66b9360023ce1fc0b614f0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto que deseja obter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do projeto",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "ID do projeto",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "cliente_id": {
+                                            "description": "ID do cliente associado",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "nome": {
+                                            "description": "Nome do projeto",
+                                            "type": "string",
+                                            "example": "Projeto Solar João"
+                                        },
+                                        "uf": {
+                                            "description": "Unidade Federativa do projeto",
+                                            "type": "string",
+                                            "example": "SP"
+                                        },
+                                        "tipo_instalacao": {
+                                            "description": "Tipo de instalação",
+                                            "type": "string",
+                                            "example": "Laje"
+                                        },
+                                        "equipamentos": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "equipamento_id": {
+                                                        "description": "ID do equipamento",
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "quantidade": {
+                                                        "description": "Quantidade do equipamento",
+                                                        "type": "integer",
+                                                        "example": 5
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Projeto não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Projeto não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Remover um projeto",
+                "description": "Remove um projeto específico pelo ID",
+                "operationId": "8300d03aa800d21b69cc5cf7610793e2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto que deseja remover",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Projeto removido com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Projeto removido com sucesso."
+                                        },
+                                        "project": {
+                                            "description": "Informações do projeto removido",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/projects": {
+            "get": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Listar todos os projetos",
+                "description": "Retorna uma lista de projetos, com a possibilidade de aplicar filtros por cliente, localização, tipo de instalação e nome.",
+                "operationId": "6c776b999cc69236cbb178cb3d61b2e6",
+                "parameters": [
+                    {
+                        "name": "cliente_id",
+                        "in": "query",
+                        "description": "ID do cliente para filtrar projetos",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "uf",
+                        "in": "query",
+                        "description": "Unidade Federativa (UF) para filtrar projetos",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "SP"
+                        }
+                    },
+                    {
+                        "name": "tipo_instalacao",
+                        "in": "query",
+                        "description": "Tipo de instalação para filtrar projetos",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Laje"
+                        }
+                    },
+                    {
+                        "name": "nome",
+                        "in": "query",
+                        "description": "Nome do projeto para busca parcial",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Solar"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de projetos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "ID do projeto",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "cliente_id": {
+                                                "description": "ID do cliente associado",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "nome": {
+                                                "description": "Nome do projeto",
+                                                "type": "string",
+                                                "example": "Projeto Solar João"
+                                            },
+                                            "uf": {
+                                                "description": "Unidade Federativa do projeto",
+                                                "type": "string",
+                                                "example": "SP"
+                                            },
+                                            "tipo_instalacao": {
+                                                "description": "Tipo de instalação",
+                                                "type": "string",
+                                                "example": "Laje"
+                                            },
+                                            "equipamentos": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "equipamento_id": {
+                                                            "description": "ID do equipamento",
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "quantidade": {
+                                                            "description": "Quantidade do equipamento",
+                                                            "type": "integer",
+                                                            "example": 5
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Atualiza um projeto de energia solar",
+                "description": "Atualização de um projeto já existente, incluindo cliente, localização e equipamentos",
+                "operationId": "a4792af6d80694b6891acd09760cb9f0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "cliente_id",
+                                    "nome",
+                                    "uf",
+                                    "tipo_instalacao"
+                                ],
+                                "properties": {
+                                    "cliente_id": {
+                                        "description": "ID do cliente associado ao projeto",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "nome": {
+                                        "description": "Nome do projeto",
+                                        "type": "string",
+                                        "example": "Projeto Solar João"
+                                    },
+                                    "uf": {
+                                        "description": "Unidade Federativa onde o projeto está localizado",
+                                        "type": "string",
+                                        "example": "SP"
+                                    },
+                                    "tipo_instalacao": {
+                                        "description": "Tipo de instalação",
+                                        "type": "string",
+                                        "example": "Laje"
+                                    },
+                                    "equipamentos": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "equipamento_id": {
+                                                    "description": "ID do equipamento",
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "quantidade": {
+                                                    "description": "Quantidade do equipamento",
+                                                    "type": "integer",
+                                                    "example": 5
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Projeto criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cliente criado com sucesso."
+                                        },
+                                        "project": {
+                                            "description": "Detalhes do projeto criado",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dados inválidos fornecidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Os dados fornecidos são inválidos."
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros de validação",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Cria um novo projeto de energia solar",
+                "description": "Criação de um novo projeto, incluindo cliente, localização e equipamentos",
+                "operationId": "6ba231f37d4426a8e0ae33d6c434f591",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "cliente_id",
+                                    "nome",
+                                    "uf",
+                                    "tipo_instalacao"
+                                ],
+                                "properties": {
+                                    "cliente_id": {
+                                        "description": "ID do cliente associado ao projeto",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "nome": {
+                                        "description": "Nome do projeto",
+                                        "type": "string",
+                                        "example": "Projeto Solar João"
+                                    },
+                                    "uf": {
+                                        "description": "Unidade Federativa onde o projeto está localizado",
+                                        "type": "string",
+                                        "example": "SP"
+                                    },
+                                    "tipo_instalacao": {
+                                        "description": "Tipo de instalação",
+                                        "type": "string",
+                                        "example": "Laje"
+                                    },
+                                    "equipamentos": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "equipamento_id": {
+                                                    "description": "ID do equipamento",
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "quantidade": {
+                                                    "description": "Quantidade do equipamento",
+                                                    "type": "integer",
+                                                    "example": 5
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Projeto criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cliente criado com sucesso."
+                                        },
+                                        "project": {
+                                            "description": "Detalhes do projeto criado",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dados inválidos fornecidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Os dados fornecidos são inválidos."
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros de validação",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Projetos",
+            "description": "Projetos"
+        }
+    ]
+}
