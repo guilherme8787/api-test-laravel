@@ -81,7 +81,7 @@ class UpdateProjectController extends Controller
 
             return response()->json(
                 [
-                    'message' => 'Projeto criado com sucesso.',
+                    'message' => 'Projeto atualizado com sucesso.',
                     'project' => $project
                 ],
                 Response::HTTP_CREATED
