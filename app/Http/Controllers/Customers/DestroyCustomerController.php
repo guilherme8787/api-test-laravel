@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Customers;
 
-use App\Exceptions\NotFoundCustomerException;
 use App\Http\Controllers\Controller;
-use App\Services\Customer\CustomerService;
+use App\Services\Customer\Contracts\CustomerServiceContract;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -14,7 +13,7 @@ class DestroyCustomerController extends Controller
     /**
      * Class constructor
      */
-    public function __construct(private CustomerService $customerService)
+    public function __construct(private CustomerServiceContract $customerService)
     {
     }
 

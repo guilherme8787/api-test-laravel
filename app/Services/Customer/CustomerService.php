@@ -3,8 +3,10 @@
 namespace App\Services\Customer;
 
 use App\Exceptions\NotFoundCustomerException;
+use App\Models\Cliente;
 use App\Repositories\Customer\CustomerRepositoryContract;
 use App\Services\Customer\Contracts\CustomerServiceContract;
+use Illuminate\Database\Eloquent\Collection;
 
 class CustomerService implements CustomerServiceContract
 {
@@ -12,17 +14,20 @@ class CustomerService implements CustomerServiceContract
         private CustomerRepositoryContract $customerRepository
     ) {}
 
-    public function all()
+    public function all(): Collection
     {
         return $this->customerRepository->all();
     }
 
-    public function create(array $data)
+    public function create(array $data): ?Cliente
     {
         return $this->customerRepository->create($data);
     }
 
-    public function find(int $id)
+    /**
+     * @inheritDoc
+     */
+    public function find(int $id): ?Cliente
     {
         $customer = $this->customerRepository->find($id);
 
@@ -33,12 +38,12 @@ class CustomerService implements CustomerServiceContract
         return $customer;
     }
 
-    public function update(array $data, int $id)
+    public function update(array $data, int $id): ?Cliente
     {
         return $this->customerRepository->update($data, $id);
     }
 
-    public function delete(int $id)
+    public function delete(int $id): ?Cliente
     {
         return $this->customerRepository->delete($id);
     }

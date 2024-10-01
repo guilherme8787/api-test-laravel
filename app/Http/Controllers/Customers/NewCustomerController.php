@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Customers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerRequest;
-use App\Services\Customer\CustomerService;
+use App\Services\Customer\Contracts\CustomerServiceContract;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -15,7 +15,7 @@ class NewCustomerController extends Controller
     /**
      * Class constructor
      */
-    public function __construct(private CustomerService $customerService)
+    public function __construct(private CustomerServiceContract $customerService)
     {
     }
 
