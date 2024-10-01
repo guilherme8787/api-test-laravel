@@ -6,11 +6,11 @@
 
 ## Documentação Postman da api
 
-- [Documentação da API]()
+- [Documentação da API](https://documenter.getpostman.com/view/14359832/2sAXxJgu2b)
 
 ## Tambem tem o arquivo para importar no Postman caso prefira
 
-- `./php-77sol-test.postman_collection.json`
+- `./77Sol.postman_collection.json`
 
 ### Caso não queira usar docker, você irá precisar configurar a aplicação com banco e redis local
 
@@ -58,5 +58,6 @@ docker compose exec app composer install
 
 ### URLs Acessíveis
 
-- Aplicação: http://127.0.0.1:9000
-- Adminer (gerenciador de banco de dados): http://127.0.0.1:8080
+- Aplicação: [http://127.0.0.1:9000](http://127.0.0.1:9000)
+- Adminer (gerenciador de banco de dados): [http://127.0.0.1:8080](http://127.0.0.1:8080)
+- Swagger [http://127.0.0.1:9000/api/documentation](http://127.0.0.1:9000/api/documentation)
