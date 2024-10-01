@@ -79,5 +79,10 @@ Route::group(
             '/{id}',
             App\Http\Controllers\Projects\GetProjectController::class
         )->name('projects.get');
+
+        Route::put(
+            '/{id}',
+            App\Http\Controllers\Projects\UpdateProjectController::class
+        )->name('projects.update');
     }
 );

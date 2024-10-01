@@ -55,10 +55,30 @@ class ProjectService implements ProjectServiceContract
         }
     }
 
+    private function safeUpdateProject(array $data, int $id): Projeto
+    {
+        DB::beginTransaction();
+        try {
+            $project = $this->projectRepository->update($data, $id);
+
+            DB::commit();
+
+            return $project;
+        } catch (Throwable|Exception $exception) {
+            Log::error("message: {$exception->getMessage()}", [
+                'exception' => $exception
+            ]);
+
+            DB::rollBack();
+            throw $exception;
+        }
+    }
+
     /**
-     * @inheritDoc
+     * @throws NotFoundLocaleException
+     * @throws NotFoundInstallTypeException
      */
-    public function create(array $data): ?Projeto
+    private function getTreatedProjectData(array $data): array
     {
         $localization = $this->getLocalization(
             data_get($data, 'uf')
@@ -81,7 +101,17 @@ class ProjectService implements ProjectServiceContract
         data_set($data, 'localizacao_id', $localization->id);
         data_set($data, 'tipo_instalacao_id', $installType->id);
 
-        return $this->safeSaveProject($data);
+        return $data;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function create(array $data): ?Projeto
+    {
+        $dataToSave = $this->getTreatedProjectData($data);
+
+        return $this->safeSaveProject($dataToSave);
     }
 
     public function getAll(array $filters): LengthAwarePaginator
@@ -101,5 +131,12 @@ class ProjectService implements ProjectServiceContract
         }
 
         return $project;
+    }
+
+    public function update(array $data, int $id): Projeto
+    {
+        $dataToUpdate = $this->getTreatedProjectData($data);
+
+        return $this->safeUpdateProject($dataToUpdate, $id);
     }
 }

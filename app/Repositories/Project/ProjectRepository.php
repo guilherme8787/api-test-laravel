@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Project;
 
+use App\Exceptions\NotFoundProjectException;
 use App\Models\Projeto;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -79,5 +80,36 @@ class ProjectRepository extends BaseRepository implements ProjectRepositoryContr
             ->with(['cliente', 'localizacao', 'tipoInstalacao', 'equipamentos'])
             ->where('projetos.id', $id)
             ->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update(array $data, int $id): Projeto
+    {
+        $projeto = $this->model->find($id);
+
+        if (!$projeto) {
+            throw new NotFoundProjectException('Projeto não encontrado');
+        }
+
+        $projeto->update([
+            'cliente_id' => $data['cliente_id'],
+            'nome' => $data['nome'],
+            'uf' => $data['uf'],
+            'tipo_instalacao' => $data['tipo_instalacao'],
+        ]);
+
+        if (!empty($data['equipamentos'])) {
+            $equipamentosData = [];
+
+            foreach ($data['equipamentos'] as $equipamento) {
+                $equipamentosData[$equipamento['equipamento_id']] = ['quantidade' => $equipamento['quantidade']];
+            }
+
+            $projeto->equipamentos()->sync($equipamentosData);
+        }
+
+        return $projeto->load(['cliente', 'equipamentos', 'localizacao']);
     }
 }

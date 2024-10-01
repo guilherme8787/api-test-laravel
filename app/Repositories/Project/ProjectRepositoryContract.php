@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Project;
 
+use App\Exceptions\NotFoundProjectException;
 use App\Models\Projeto;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +17,9 @@ interface ProjectRepositoryContract
     public function getAll(array $filters);
 
     public function get(int $id): ?Projeto;
+
+    /**
+     * @throws NotFoundProjectException
+     */
+    public function update(array $data, int $id): Projeto;
 }
