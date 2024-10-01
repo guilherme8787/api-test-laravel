@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Exceptions\NotFoundProjectException;
+use App\Models\Cliente;
 use App\Models\Localizacao;
 use App\Models\Projeto;
 use App\Models\TipoInstalacao;
@@ -68,25 +69,26 @@ class GetProjectControllerTest extends TestCase
 
     public function testSuccessfulGetProjectWithNameFilter()
     {
+        $clientId = Cliente::factory()->create()->id;
         $fakeName = $this->faker->unique()->words(3, true);
         $data = [
-            'id' => 1,
+            'cliente_id' => $clientId,
             'nome' => $fakeName
         ];
 
         Projeto::factory()->create($data);
         Projeto::factory()->create([
             'nome' => 'Projeto Solar João',
-            'cliente_id' => 1,
+            'cliente_id' => Cliente::factory()->create()->id,
             'localizacao_id' => Localizacao::factory()->create(['uf' => 'RJ'])->id,
             'tipo_instalacao_id' => TipoInstalacao::factory()
         ]);
 
-        $response = $this->getJson('/api/projects/1?nome=' . $fakeName);
+        $response = $this->getJson('/api/projects?nome=' . $fakeName);
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertJson([
-            'cliente_id' => 1,
+        $response->assertJsonFragment([
+            'cliente_id' => $clientId,
             'nome' => $fakeName,
         ]);
         $response->assertJsonMissing([

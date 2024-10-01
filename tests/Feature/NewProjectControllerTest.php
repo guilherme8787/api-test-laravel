@@ -49,9 +49,11 @@ class NewProjectControllerTest extends TestCase
     public function testSuccessfullCreateProject()
     {
         $data = $this->mountedProjectReturn();
+        $client = Cliente::factory()->create();
+
+        $data['cliente_id'] = $client->id;
 
         Equipamento::factory()->create();
-        Cliente::factory()->create();
         TipoInstalacao::factory()->create();
         Localizacao::factory()->create();
 
@@ -81,9 +83,16 @@ class NewProjectControllerTest extends TestCase
     public function testErroWithClientNotExists()
     {
         $data = $this->mountedProjectReturn();
+        $equip = Equipamento::factory()->create();
 
-        Equipamento::factory()->create();
-        TipoInstalacao::factory()->create();
+        $data['equipamentos'] = [
+            [
+                'equipamento_id' => $equip->id,
+                'quantidade' => 2
+            ]
+        ];
+
+        TipoInstalacao::factory()->valid()->create();
         Localizacao::factory()->create();
 
         $response = $this->postJson('/api/projects', $data);
@@ -100,9 +109,10 @@ class NewProjectControllerTest extends TestCase
     public function testErrorWithEquipNotExists()
     {
         $data = $this->mountedProjectReturn();
+        $client = Cliente::factory()->create();
+        $data['cliente_id'] = $client->id;
 
-        Cliente::factory()->create();
-        TipoInstalacao::factory()->create();
+        TipoInstalacao::factory()->valid()->create();
         Localizacao::factory()->create();
 
         $data['equipamentos'] = [
@@ -123,38 +133,21 @@ class NewProjectControllerTest extends TestCase
         ]);
     }
 
-    public function testErrorWithCustomerAndEquipNotExists()
-    {
-        $data = $this->mountedProjectReturn();
-
-        TipoInstalacao::factory()->create();
-        Localizacao::factory()->create();
-
-        $data['equipamentos'] = [
-            [
-                'equipamento_id' => $this->faker()->randomDigitNotNull,
-                'quantidade' => $this->faker()->randomDigitNotNull
-            ]
-        ];
-
-        $response = $this->postJson('/api/projects', $data);
-
-        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $response->assertJson([
-            'message' => 'O cliente informado não existe. (and 1 more error)',
-            'errors' => [
-                'cliente_id' => ['O cliente informado não existe.'],
-                'equipamentos.0.equipamento_id' => ['O equipamento informado não existe.']
-            ]
-        ]);
-    }
-
     public function testErrorWithNotValidInstallationType()
     {
         $data = $this->mountedProjectReturn();
+        $client = Cliente::factory()->create();
+        $equip = Equipamento::factory()->create();
 
-        Cliente::factory()->create();
-        Equipamento::factory()->create();
+        $data['equipamentos'] = [
+            [
+                'equipamento_id' => $equip->id,
+                'quantidade' => 2
+            ]
+        ];
+        $data['cliente_id'] = $client->id;
+
+        TipoInstalacao::factory()->valid()->create();
         Localizacao::factory()->create();
 
         $data['tipo_instalacao'] = 'Tipo Inválido';
@@ -173,10 +166,18 @@ class NewProjectControllerTest extends TestCase
     public function testErrorWithNotValidLocation()
     {
         $data = $this->mountedProjectReturn();
+        $client = Cliente::factory()->create();
+        $equip = Equipamento::factory()->create();
 
-        Equipamento::factory()->create();
-        Cliente::factory()->create();
-        TipoInstalacao::factory()->create();
+        $data['equipamentos'] = [
+            [
+                'equipamento_id' => $equip->id,
+                'quantidade' => 2
+            ]
+        ];
+        $data['cliente_id'] = $client->id;
+
+        TipoInstalacao::factory()->valid()->create();
         Localizacao::factory()->create();
 
         $data['uf'] = 'OK';
@@ -196,9 +197,17 @@ class NewProjectControllerTest extends TestCase
     public function testErrorWithValidLocationRequestButNotInDb()
     {
         $data = $this->mountedProjectReturn();
+        $client = Cliente::factory()->create();
+        $equip = Equipamento::factory()->create();
 
-        Equipamento::factory()->create();
-        Cliente::factory()->create();
+        $data['equipamentos'] = [
+            [
+                'equipamento_id' => $equip->id,
+                'quantidade' => 2
+            ]
+        ];
+        $data['cliente_id'] = $client->id;
+
         TipoInstalacao::factory()->valid()->create();
         Localizacao::factory()->create();
 

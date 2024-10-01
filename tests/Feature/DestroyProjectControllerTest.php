@@ -2,17 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Exceptions\NotFoundProjectException;
-use App\Models\Localizacao;
 use App\Models\Projeto;
-use App\Models\TipoInstalacao;
-use App\Services\Project\Contracts\ProjectServiceContract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
-use Mockery;
-use Mockery\MockInterface;
 use Tests\TestCase;
 
 class DestroyProjectControllerTest extends TestCase

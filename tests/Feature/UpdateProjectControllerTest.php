@@ -49,26 +49,23 @@ class UpdateProjectControllerTest extends TestCase
     public function testSuccessfulUpdateProject()
     {
         $data = $this->mountedProjectReturn();
+        $clientId = Cliente::factory()->create()->id;
+        $fakeName = $this->faker->unique()->words(3, true);
+        $data['cliente_id'] = $clientId;
+        $projectData = [
+            'cliente_id' => $clientId,
+            'nome' => $fakeName
+        ];
 
-        $project = Projeto::factory()->create();
-
-        $this->instance(
-            ProjectServiceContract::class,
-            Mockery::mock(ProjectServiceContract::class, function (MockInterface $mock) use ($data) {
-                $mock->shouldReceive('update')
-                    ->once()
-                    ->with($data, 1)
-                    ->andReturn(new Projeto($this->mountedProjectReturn()));
-            })
-        );
+        $project = Projeto::factory($projectData)->create();
 
         $response = $this->putJson('/api/projects/' . $project->id, $data);
 
         $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJson([
-            "message" => "Projeto atualizado com sucesso.",
-            "project" => [
-                'cliente_id' => 1,
+            'message' => 'Projeto atualizado com sucesso.',
+            'project' => [
+                'cliente_id' => $clientId,
                 'nome' => 'Projeto Solar Atualizado',
             ]
         ]);
@@ -77,16 +74,23 @@ class UpdateProjectControllerTest extends TestCase
     public function testSuccessfulUpdateProjectEquips()
     {
         $data = $this->mountedProjectReturn();
+        $clientId = Cliente::factory()->create()->id;
+        $fakeName = $this->faker->unique()->words(3, true);
+        $data['cliente_id'] = $clientId;
+        $projectData = [
+            'cliente_id' => $clientId,
+            'nome' => $fakeName
+        ];
 
-        $project = Projeto::factory()->create();
+        $project = Projeto::factory($projectData)->create();
 
         $response = $this->putJson('/api/projects/' . $project->id, $data);
 
         $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJson([
-            "message" => "Projeto atualizado com sucesso.",
-            "project" => [
-                'cliente_id' => 1,
+            'message' => 'Projeto atualizado com sucesso.',
+            'project' => [
+                'cliente_id' => $clientId,
                 'nome' => 'Projeto Solar Atualizado',
             ]
         ]);
