@@ -71,4 +71,13 @@ class ProjectRepository extends BaseRepository implements ProjectRepositoryContr
 
         return $query->paginate(self::PER_PAGE);
     }
+
+    public function get(int $id): ?Projeto
+    {
+        return $this->model
+            ->select('projetos.*')
+            ->with(['cliente', 'localizacao', 'tipoInstalacao', 'equipamentos'])
+            ->where('projetos.id', $id)
+            ->first();
+    }
 }

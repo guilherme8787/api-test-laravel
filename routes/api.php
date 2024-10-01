@@ -74,5 +74,10 @@ Route::group(
             '/',
             App\Http\Controllers\Projects\GetAllProjectsController::class
         )->name('projects.all');
+
+        Route::get(
+            '/{id}',
+            App\Http\Controllers\Projects\GetProjectController::class
+        )->name('projects.get');
     }
 );

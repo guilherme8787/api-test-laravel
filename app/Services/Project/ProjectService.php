@@ -4,6 +4,7 @@ namespace App\Services\Project;
 
 use App\Exceptions\NotFoundInstallTypeException;
 use App\Exceptions\NotFoundLocaleException;
+use App\Exceptions\NotFoundProjectException;
 use App\Models\Localizacao;
 use App\Models\Projeto;
 use App\Models\TipoInstalacao;
@@ -54,6 +55,9 @@ class ProjectService implements ProjectServiceContract
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function create(array $data): ?Projeto
     {
         $localization = $this->getLocalization(
@@ -83,5 +87,19 @@ class ProjectService implements ProjectServiceContract
     public function getAll(array $filters): LengthAwarePaginator
     {
         return $this->projectRepository->getAll($filters);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function get(int $id): ?Projeto
+    {
+        $project =  $this->projectRepository->get($id);
+
+        if (!$project) {
+            throw new NotFoundProjectException('Projeto não encontrado.');
+        }
+
+        return $project;
     }
 }
