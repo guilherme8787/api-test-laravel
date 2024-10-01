@@ -26,12 +26,12 @@ class NewProjectController extends Controller
         try {
             $data = $request->validated();
 
-            $customer = $this->projectService->create($data);
+            $project = $this->projectService->create($data);
 
             return response()->json(
                 [
                     'message' => 'Projeto criado com sucesso.',
-                    'customer' => $customer
+                    'project' => $project
                 ],
                 Response::HTTP_CREATED
             );

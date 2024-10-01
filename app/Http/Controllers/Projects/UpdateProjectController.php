@@ -26,12 +26,12 @@ class UpdateProjectController extends Controller
         try {
             $data = $request->validated();
 
-            $customer = $this->projectService->update($data, $id);
+            $project = $this->projectService->update($data, $id);
 
             return response()->json(
                 [
                     'message' => 'Projeto criado com sucesso.',
-                    'customer' => $customer
+                    'project' => $project
                 ],
                 Response::HTTP_CREATED
             );
