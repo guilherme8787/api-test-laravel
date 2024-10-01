@@ -10,7 +10,7 @@
 
 ## Tambem tem o arquivo para importar no Postman caso prefira
 
-- `./77Sol.postman_collection.json`
+- `./77sol.postman_collection.json`
 
 ### Caso não queira usar docker, você irá precisar configurar a aplicação com banco e redis local
 
@@ -54,6 +54,12 @@ Se o composer install falhar durante o build, você pode executar manualmente de
 
 ```bash
 docker compose exec app composer install
+```
+
+### 6. Caso o .env não seja copiado de forma satisfatória
+
+```bash
+cp .env.example .env
 ```
 
 ### URLs Acessíveis
