@@ -30,7 +30,7 @@ class NewProjectController extends Controller
 
             return response()->json(
                 [
-                    'message' => 'Cliente criado com sucesso.',
+                    'message' => 'Projeto criado com sucesso.',
                     'customer' => $customer
                 ],
                 Response::HTTP_CREATED
