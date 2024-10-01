@@ -84,5 +84,10 @@ Route::group(
             '/{id}',
             App\Http\Controllers\Projects\UpdateProjectController::class
         )->name('projects.update');
+
+        Route::delete(
+            '/{id}',
+            App\Http\Controllers\Projects\DestroyProjectController::class
+        )->name('projects.destroy');
     }
 );

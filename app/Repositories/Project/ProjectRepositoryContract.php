@@ -22,4 +22,10 @@ interface ProjectRepositoryContract
      * @throws NotFoundProjectException
      */
     public function update(array $data, int $id): Projeto;
+
+    /**
+    * @param int $id
+    * @return Model
+    */
+    public function delete(int $id);
 }

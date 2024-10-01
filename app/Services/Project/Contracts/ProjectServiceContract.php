@@ -18,4 +18,6 @@ interface ProjectServiceContract
     public function get(int $id): ?Projeto;
 
     public function update(array $data, int $id): Projeto;
+
+    public function delete(int $id): Projeto;
 }

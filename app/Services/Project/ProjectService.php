@@ -139,4 +139,9 @@ class ProjectService implements ProjectServiceContract
 
         return $this->safeUpdateProject($dataToUpdate, $id);
     }
+
+    public function delete(int $id): Projeto
+    {
+        return $this->projectRepository->delete($id);
+    }
 }
