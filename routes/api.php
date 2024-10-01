@@ -52,13 +52,15 @@ Route::group(
     }
 );
 
-Route::get('tipos-instalacao', function() {
-    return response()->json(TipoInstalacao::all());
-});
+Route::get(
+    'tipos-instalacao',
+    App\Http\Controllers\InstallTypes\GetAllInstallTypesController::class
+);
 
-Route::get('equipamentos', function() {
-    return response()->json(Equipamento::all());
-});
+Route::get(
+    'equipamentos',
+    App\Http\Controllers\Equipment\GetAllEquipmentsController::class
+);
 
 Route::group(
     [
