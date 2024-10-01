@@ -66,7 +66,7 @@ class DestroyProjectController extends Controller
 
             return response()->json(
                 [
-                    'message' => $exception->getMessage()
+                    'message' => 'Erro interno do servidor'
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
