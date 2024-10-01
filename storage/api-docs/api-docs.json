@@ -15,6 +15,596 @@
         }
     ],
     "paths": {
+        "/api/customers/{id}": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Obter detalhes de um cliente",
+                "description": "Retorna os detalhes de um cliente específico pelo ID",
+                "operationId": "ce9f0b370a0eeab8e57f8671745b7e00",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do cliente que deseja obter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do cliente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "ID do cliente",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "nome": {
+                                            "description": "Nome do cliente",
+                                            "type": "string",
+                                            "example": "João Silva"
+                                        },
+                                        "email": {
+                                            "description": "E-mail do cliente",
+                                            "type": "string",
+                                            "example": "joao.silva@example.com"
+                                        },
+                                        "telefone": {
+                                            "description": "Telefone do cliente",
+                                            "type": "string",
+                                            "example": "(11) 99999-9999"
+                                        },
+                                        "cpf": {
+                                            "description": "CPF do cliente",
+                                            "type": "string",
+                                            "example": "123.456.789-00"
+                                        },
+                                        "cnpj": {
+                                            "description": "CNPJ do cliente",
+                                            "type": "string",
+                                            "example": "12.345.678/0001-99"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cliente não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cliente não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Atualizar um cliente existente",
+                "description": "Atualiza os detalhes de um cliente específico pelo ID",
+                "operationId": "e5efc79df4bbc706911683cf3c3acbe0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do cliente que deseja atualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "description": "Nome do cliente",
+                                        "type": "string",
+                                        "example": "João Silva"
+                                    },
+                                    "email": {
+                                        "description": "E-mail do cliente",
+                                        "type": "string",
+                                        "example": "joao.silva@example.com"
+                                    },
+                                    "telefone": {
+                                        "description": "Telefone do cliente",
+                                        "type": "string",
+                                        "example": "(11) 99999-9999"
+                                    },
+                                    "cpf": {
+                                        "description": "CPF do cliente (opcional)",
+                                        "type": "string",
+                                        "example": "123.456.789-00"
+                                    },
+                                    "cnpj": {
+                                        "description": "CNPJ do cliente (opcional)",
+                                        "type": "string",
+                                        "example": "12.345.678/0001-99"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Cliente atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cliente atualizado com sucesso."
+                                        },
+                                        "customer": {
+                                            "description": "Detalhes do cliente atualizado",
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID do cliente",
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "nome": {
+                                                    "description": "Nome do cliente",
+                                                    "type": "string",
+                                                    "example": "João Silva"
+                                                },
+                                                "email": {
+                                                    "description": "E-mail do cliente",
+                                                    "type": "string",
+                                                    "example": "joao.silva@example.com"
+                                                },
+                                                "telefone": {
+                                                    "description": "Telefone do cliente",
+                                                    "type": "string",
+                                                    "example": "(11) 99999-9999"
+                                                },
+                                                "cpf": {
+                                                    "description": "CPF do cliente",
+                                                    "type": "string",
+                                                    "example": "123.456.789-00"
+                                                },
+                                                "cnpj": {
+                                                    "description": "CNPJ do cliente",
+                                                    "type": "string",
+                                                    "example": "12.345.678/0001-99"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dados inválidos fornecidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Os dados fornecidos são inválidos."
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros de validação",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Remover um cliente",
+                "description": "Remove um cliente específico pelo ID",
+                "operationId": "d24db45dbc4aca69a37be39523c11098",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do cliente que deseja remover",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Cliente removido com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cliente removido com sucesso."
+                                        },
+                                        "customer": {
+                                            "description": "Informações do cliente removido",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/customers": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Listar todos os clientes",
+                "description": "Retorna uma lista de todos os clientes cadastrados",
+                "operationId": "a0648af790f9a0e02ca65003c365ed12",
+                "responses": {
+                    "200": {
+                        "description": "Lista de clientes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "ID do cliente",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "nome": {
+                                                "description": "Nome do cliente",
+                                                "type": "string",
+                                                "example": "João Silva"
+                                            },
+                                            "email": {
+                                                "description": "E-mail do cliente",
+                                                "type": "string",
+                                                "example": "joao.silva@example.com"
+                                            },
+                                            "telefone": {
+                                                "description": "Telefone do cliente",
+                                                "type": "string",
+                                                "example": "(11) 99999-9999"
+                                            },
+                                            "cpf": {
+                                                "description": "CPF do cliente",
+                                                "type": "string",
+                                                "example": "123.456.789-00"
+                                            },
+                                            "cnpj": {
+                                                "description": "CNPJ do cliente",
+                                                "type": "string",
+                                                "example": "12.345.678/0001-99"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Criar um novo cliente",
+                "description": "Cria um novo cliente e retorna os detalhes do cliente criado",
+                "operationId": "9696a1cb6f2ad4a92e14e022412679cf",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "email",
+                                    "telefone"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "description": "Nome do cliente",
+                                        "type": "string",
+                                        "example": "João Silva"
+                                    },
+                                    "email": {
+                                        "description": "E-mail do cliente",
+                                        "type": "string",
+                                        "example": "joao.silva@example.com"
+                                    },
+                                    "telefone": {
+                                        "description": "Telefone do cliente",
+                                        "type": "string",
+                                        "example": "(11) 99999-9999"
+                                    },
+                                    "cpf": {
+                                        "description": "CPF do cliente (opcional)",
+                                        "type": "string",
+                                        "example": "123.456.789-00"
+                                    },
+                                    "cnpj": {
+                                        "description": "CNPJ do cliente (opcional)",
+                                        "type": "string",
+                                        "example": "12.345.678/0001-99"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cliente criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cliente criado com sucesso."
+                                        },
+                                        "customer": {
+                                            "description": "Detalhes do cliente criado",
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID do cliente",
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "nome": {
+                                                    "description": "Nome do cliente",
+                                                    "type": "string",
+                                                    "example": "João Silva"
+                                                },
+                                                "email": {
+                                                    "description": "E-mail do cliente",
+                                                    "type": "string",
+                                                    "example": "joao.silva@example.com"
+                                                },
+                                                "telefone": {
+                                                    "description": "Telefone do cliente",
+                                                    "type": "string",
+                                                    "example": "(11) 99999-9999"
+                                                },
+                                                "cpf": {
+                                                    "description": "CPF do cliente",
+                                                    "type": "string",
+                                                    "example": "123.456.789-00"
+                                                },
+                                                "cnpj": {
+                                                    "description": "CNPJ do cliente",
+                                                    "type": "string",
+                                                    "example": "12.345.678/0001-99"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dados inválidos fornecidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Os dados fornecidos são inválidos."
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros de validação",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/equipamentos": {
+            "get": {
+                "tags": [
+                    "Equipamentos"
+                ],
+                "summary": "Listar todos os equipamentos",
+                "description": "Retorna uma lista de todos os equipamentos disponíveis",
+                "operationId": "f57162034586faf7efc7227f1ebee89e",
+                "responses": {
+                    "200": {
+                        "description": "Lista de equipamentos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "ID do equipamento",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "nome": {
+                                                "description": "Nome do equipamento",
+                                                "type": "string",
+                                                "example": "Módulo"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tipos-instalacao": {
+            "get": {
+                "tags": [
+                    "Tipos de Instalação"
+                ],
+                "summary": "Listar todos os tipos de instalação",
+                "description": "Retorna uma lista de todos os tipos de instalação disponíveis",
+                "operationId": "4fa6ab304ee00f21c5ee6e7e775a3c7d",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tipos de instalação",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "ID do tipo de instalação",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "nome": {
+                                                "description": "Nome do tipo de instalação",
+                                                "type": "string",
+                                                "example": "Fibrocimento (Madeira)"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/projects/{id}": {
             "get": {
                 "tags": [
@@ -558,6 +1148,18 @@
         }
     },
     "tags": [
+        {
+            "name": "Clientes",
+            "description": "Clientes"
+        },
+        {
+            "name": "Equipamentos",
+            "description": "Equipamentos"
+        },
+        {
+            "name": "Tipos de Instalação",
+            "description": "Tipos de Instalação"
+        },
         {
             "name": "Projetos",
             "description": "Projetos"

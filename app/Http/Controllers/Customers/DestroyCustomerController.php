@@ -8,6 +8,36 @@ use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @OA\Delete(
+ *     path="/api/customers/{id}",
+ *     summary="Remover um cliente",
+ *     description="Remove um cliente específico pelo ID",
+ *     tags={"Clientes"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID do cliente que deseja remover",
+ *         required=true,
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=202,
+ *         description="Cliente removido com sucesso",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Cliente removido com sucesso."),
+ *             @OA\Property(property="customer", type="object", description="Informações do cliente removido")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=500,
+ *         description="Erro interno do servidor",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Erro interno do servidor")
+ *         )
+ *     )
+ * )
+ */
 class DestroyCustomerController extends Controller
 {
     /**
